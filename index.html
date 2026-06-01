@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-slate-950 text-slate-100">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palestine Summer Routine & Gamer Planner</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        palestine: {
+                            green: '#007A3D',
+                            red: '#E4312B',
+                            black: '#000000',
+                            white: '#FFFFFF'
+                        },
+                        ps: {
+                            blue: '#003087',
+                            lightBlue: '#0070d8'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', 'Tajawal', sans-serif;
+        }
+        /* Custom scrollbar styling for a cleaner look */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #020617;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #0070d8;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-ps-lightBlue selection:text-white">
+
+    <!-- Top Notification Banner for Palestine context -->
+    <div class="bg-gradient-to-r from-red-600 via-neutral-900 to-emerald-700 text-white py-1.5 px-4 text-center text-xs font-semibold tracking-wide flex items-center justify-center gap-2 shadow-inner">
+        <span class="inline-block w-2.5 h-2.5 rounded-full bg-red-500 animate-ping"></span>
+        <span id="top-banner-text">Summer Routine 2026 • Live Salat Tracker for Ramallah / West Bank, Palestine</span>
+    </div>
+
+    <!-- Main Navigation Header -->
+    <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur-md sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <!-- Dual Controller & Crescent Icon -->
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-ps-blue to-emerald-600 flex items-center justify-center text-white shadow-lg shadow-ps-blue/20">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a2 2 0 002 2h3a1 1 0 011 1v13a1 1 0 01-1 1H3a1 1 0 01-1-1V8a1 1 0 011-1h3a2 2 0 002-2V4a2 2 0 014 0z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6M12 10v6"></path>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-md sm:text-lg font-extrabold bg-gradient-to-r from-white via-slate-200 to-emerald-400 bg-clip-text text-transparent">AL-BATTAL SCHEDULER</h1>
+                    <p class="text-[10px] text-slate-400 font-medium tracking-widest uppercase">Palestine Summer Edition</p>
+                </div>
+            </div>
+
+            <!-- Date, Time and Quick Stats -->
+            <div class="flex items-center gap-4">
+                <div class="hidden md:flex flex-col text-right">
+                    <span class="text-xs text-slate-400">Palestinian Time (EEST)</span>
+                    <span id="current-time-display" class="text-sm font-bold text-slate-100">11:30 AM</span>
+                </div>
+                <div class="h-8 w-px bg-slate-800 hidden md:block"></div>
+                <!-- XP Tracker Pill -->
+                <div class="bg-slate-800/80 border border-slate-700 rounded-full px-3.5 py-1 flex items-center gap-2">
+                    <div class="w-5 h-5 rounded-full bg-amber-500 flex items-center justify-center text-[10px] font-black text-slate-900">XP</div>
+                    <div class="text-xs font-semibold">
+                        <span id="xp-counter" class="text-amber-400">0</span> <span class="text-slate-400">/ 500</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- LEFT COLUMN: Live Salat Monitor & Interactive Location Map (4 Cols) -->
+        <section class="lg:col-span-4 flex flex-col gap-6">
+            
+            <!-- NEW Interactive Map & Location Selector Card -->
+            <div class="bg-gradient-to-b from-slate-900 to-slate-950 border border-slate-800 rounded-2xl p-5 shadow-xl relative overflow-hidden">
+                <div class="flex justify-between items-center mb-3">
+                    <div>
+                        <span class="text-[10px] bg-red-950 border border-red-800/50 text-red-400 font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Map Configuration</span>
+                        <h2 class="text-base font-bold text-slate-100 mt-1">Select Your Location</h2>
+                    </div>
+                    <span class="text-[11px] text-slate-400" id="selected-city-tag">Ramallah</span>
+                </div>
+
+                <div class="grid grid-cols-12 gap-4 items-center">
+                    <!-- Interactive Stylized Mini-Map of Palestine -->
+                    <div class="col-span-5 flex justify-center bg-slate-950/80 border border-slate-800 rounded-xl p-2 h-48 relative">
+                        <svg class="h-full w-auto text-slate-700" viewBox="0 0 120 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Background Map path representing Palestine's boundary silhouette -->
+                            <path d="M45,10 C50,15 55,20 52,35 C48,45 53,60 55,75 C58,85 53,105 50,120 C45,135 48,155 42,170 C38,185 30,195 25,205 C20,215 15,220 5,230 L10,245 C20,240 30,230 40,225 C45,210 52,200 62,190 C72,180 78,165 75,145 C72,130 80,115 85,95 C90,75 80,60 75,45 C70,30 65,15 45,10 Z" fill="#1e293b" stroke="#334155" stroke-width="1.5" />
+                            
+                            <!-- West Bank Area Highlight -->
+                            <path d="M50,75 C53,85 48,105 45,120 C42,135 45,155 40,170 C48,165 58,160 62,150 C68,140 75,135 72,120 C70,110 74,95 70,85 C65,75 55,72 50,75 Z" fill="#064e3b" stroke="#059669" stroke-width="1" class="opacity-40" />
+
+                            <!-- Gaza Area Highlight -->
+                            <path d="M12,215 C10,220 5,225 3,232 L8,240 C14,235 18,225 15,218 Z" fill="#7f1d1d" stroke="#ef4444" stroke-width="1" class="opacity-40" />
+                            
+                            <!-- Map Interactive Pins -->
+                            <!-- Nablus Pin -->
+                            <circle cx="58" cy="95" r="5" id="pin-nablus" onclick="selectCity('nablus')" class="cursor-pointer fill-slate-500 hover:fill-emerald-400 stroke-slate-900 stroke-2 transition duration-150 animate-bounce" />
+                            <!-- Ramallah Pin -->
+                            <circle cx="56" cy="120" r="6" id="pin-ramallah" onclick="selectCity('ramallah')" class="cursor-pointer fill-emerald-400 stroke-slate-900 stroke-2 transition duration-150 scale-125" />
+                            <!-- Jerusalem Pin -->
+                            <circle cx="54" cy="135" r="5" id="pin-jerusalem" onclick="selectCity('jerusalem')" class="cursor-pointer fill-slate-500 hover:fill-emerald-400 stroke-slate-900 stroke-2 transition duration-150" />
+                            <!-- Hebron Pin -->
+                            <circle cx="50" cy="158" r="5" id="pin-hebron" onclick="selectCity('hebron')" class="cursor-pointer fill-slate-500 hover:fill-emerald-400 stroke-slate-900 stroke-2 transition duration-150" />
+                            <!-- Gaza Pin -->
+                            <circle cx="10" cy="225" r="5" id="pin-gaza" onclick="selectCity('gaza')" class="cursor-pointer fill-slate-500 hover:fill-emerald-400 stroke-slate-900 stroke-2 transition duration-150" />
+                        </svg>
+                        <div class="absolute bottom-1 right-2 text-[8px] text-slate-500">Stylized interactive map</div>
+                    </div>
+
+                    <!-- City Buttons List -->
+                    <div class="col-span-7 space-y-2">
+                        <button onclick="selectCity('ramallah')" id="btn-city-ramallah" class="w-full text-left text-xs font-semibold py-1.5 px-2.5 rounded-lg border bg-emerald-950/40 border-emerald-600/80 text-emerald-300 transition flex items-center justify-between">
+                            <span>📍 Ramallah</span>
+                            <span class="text-[9px] text-slate-400">Base</span>
+                        </button>
+                        <button onclick="selectCity('jerusalem')" id="btn-city-jerusalem" class="w-full text-left text-xs font-semibold py-1.5 px-2.5 rounded-lg border bg-slate-950 border-slate-800 text-slate-300 hover:border-slate-700 transition flex items-center justify-between">
+                            <span>📍 Jerusalem Al-Quds</span>
+                            <span class="text-[9px] text-slate-400">Same time</span>
+                        </button>
+                        <button onclick="selectCity('gaza')" id="btn-city-gaza" class="w-full text-left text-xs font-semibold py-1.5 px-2.5 rounded-lg border bg-slate-950 border-slate-800 text-slate-300 hover:border-slate-700 transition flex items-center justify-between">
+                            <span>📍 Gaza Strip</span>
+                            <span class="text-[9px] text-emerald-400">+3 min</span>
+                        </button>
+                        <button onclick="selectCity('hebron')" id="btn-city-hebron" class="w-full text-left text-xs font-semibold py-1.5 px-2.5 rounded-lg border bg-slate-950 border-slate-800 text-slate-300 hover:border-slate-700 transition flex items-center justify-between">
+                            <span>📍 Hebron (Al-Khalil)</span>
+                            <span class="text-[9px] text-emerald-400">+2 min</span>
+                        </button>
+                        <button onclick="selectCity('nablus')" id="btn-city-nablus" class="w-full text-left text-xs font-semibold py-1.5 px-2.5 rounded-lg border bg-slate-950 border-slate-800 text-slate-300 hover:border-slate-700 transition flex items-center justify-between">
+                            <span>📍 Nablus</span>
+                            <span class="text-[9px] text-red-400">-1 min</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Live Salat Card -->
+            <div class="bg-gradient-to-b from-slate-900 to-slate-950 border border-slate-800 rounded-2xl p-5 shadow-xl relative overflow-hidden">
+                <!-- Decorative Top Border representing Palestine Colors -->
+                <div class="absolute top-0 left-0 right-0 h-1 flex">
+                    <div class="bg-black w-1/4 h-full"></div>
+                    <div class="bg-red-600 w-1/4 h-full"></div>
+                    <div class="bg-emerald-600 w-1/4 h-full"></div>
+                    <div class="bg-white w-1/4 h-full"></div>
+                </div>
+                
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <span class="text-[10px] bg-emerald-950 border border-emerald-800/50 text-emerald-400 font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Prayer Times</span>
+                        <h2 class="text-lg font-bold text-slate-100 mt-1 flex items-center gap-1.5" id="salat-location-header">
+                            Ramallah, Palestine 
+                            <svg class="w-4 h-4 text-emerald-400" fill="currentColor" viewBox="0 0 20 20"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path></svg>
+                        </h2>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-[10px] text-slate-400 block uppercase font-semibold">Hijri Date</span>
+                        <span class="text-xs text-slate-200 font-medium">15 Dhu al-Hijjah 1447</span>
+                    </div>
+                </div>
+
+                <!-- Next Prayer Countdown Box -->
+                <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-4 mb-4 flex flex-col justify-between items-center text-center relative overflow-hidden">
+                    <div class="absolute -right-6 -bottom-6 text-slate-900 opacity-20 select-none">
+                        <svg class="w-24 h-24" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/></svg>
+                    </div>
+                    <span class="text-xs text-slate-400 uppercase tracking-widest font-bold">Countdown to Next Prayer</span>
+                    <span id="next-prayer-name" class="text-2xl font-extrabold text-amber-400 mt-1 uppercase">Dhuhr</span>
+                    <span id="next-prayer-timer" class="text-3xl font-mono font-black text-slate-100 my-1 animate-pulse">01:06:42</span>
+                    <p class="text-[11px] text-emerald-400/80 font-medium italic mt-1">"Salat is the key to success in this world and the hereafter."</p>
+                </div>
+
+                <!-- Salat Timetable Grid -->
+                <div class="space-y-2" id="salat-timetable">
+                    <!-- Fajr -->
+                    <div class="flex items-center justify-between p-2.5 rounded-lg bg-slate-950 border border-slate-800/80 hover:border-slate-700 transition" id="salat-fajr">
+                        <div class="flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-slate-500"></span>
+                            <span class="text-xs font-semibold text-slate-300">Fajr</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span id="time-fajr" class="text-xs font-mono font-bold text-slate-400">3:55 AM</span>
+                            <button onclick="toggleSalatCheck('fajr')" id="btn-fajr" class="w-6 h-6 rounded bg-slate-800 hover:bg-emerald-950 border border-slate-700 flex items-center justify-center transition">
+                                <svg class="w-4 h-4 text-emerald-400 hidden" id="chk-fajr" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Dhuhr -->
+                    <div class="flex items-center justify-between p-2.5 rounded-lg bg-slate-950 border border-slate-800/80 hover:border-slate-700 transition" id="salat-dhuhr">
+                        <div class="flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-slate-500"></span>
+                            <span class="text-xs font-semibold text-slate-300">Dhuhr</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span id="time-dhuhr" class="text-xs font-mono font-bold text-slate-400">12:37 PM</span>
+                            <button onclick="toggleSalatCheck('dhuhr')" id="btn-dhuhr" class="w-6 h-6 rounded bg-slate-800 hover:bg-emerald-950 border border-slate-700 flex items-center justify-center transition">
+                                <svg class="w-4 h-4 text-emerald-400 hidden" id="chk-dhuhr" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Asr -->
+                    <div class="flex items-center justify-between p-2.5 rounded-lg bg-slate-950 border border-slate-800/80 hover:border-slate-700 transition" id="salat-asr">
+                        <div class="flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-slate-500"></span>
+                            <span class="text-xs font-semibold text-slate-300">Asr</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span id="time-asr" class="text-xs font-mono font-bold text-slate-400">4:18 PM</span>
+                            <button onclick="toggleSalatCheck('asr')" id="btn-asr" class="w-6 h-6 rounded bg-slate-800 hover:bg-emerald-950 border border-slate-700 flex items-center justify-center transition">
+                                <svg class="w-4 h-4 text-emerald-400 hidden" id="chk-asr" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Maghrib -->
+                    <div class="flex items-center justify-between p-2.5 rounded-lg bg-slate-950 border border-slate-800/80 hover:border-slate-700 transition" id="salat-maghrib">
+                        <div class="flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-slate-500"></span>
+                            <span class="text-xs font-semibold text-slate-300">Maghrib</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span id="time-maghrib" class="text-xs font-mono font-bold text-slate-400">7:42 PM</span>
+                            <button onclick="toggleSalatCheck('maghrib')" id="btn-maghrib" class="w-6 h-6 rounded bg-slate-800 hover:bg-emerald-950 border border-slate-700 flex items-center justify-center transition">
+                                <svg class="w-4 h-4 text-emerald-400 hidden" id="chk-maghrib" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Isha -->
+                    <div class="flex items-center justify-between p-2.5 rounded-lg bg-slate-950 border border-slate-800/80 hover:border-slate-700 transition" id="salat-isha">
+                        <div class="flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-slate-500"></span>
+                            <span class="text-xs font-semibold text-slate-300">Isha</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span id="time-isha" class="text-xs font-mono font-bold text-slate-400">9:16 PM</span>
+                            <button onclick="toggleSalatCheck('isha')" id="btn-isha" class="w-6 h-6 rounded bg-slate-800 hover:bg-emerald-950 border border-slate-700 flex items-center justify-center transition">
+                                <svg class="w-4 h-4 text-emerald-400 hidden" id="chk-isha" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game Profile Card -->
+            <div class="bg-gradient-to-b from-slate-900 to-slate-950 border border-slate-800 rounded-2xl p-5 shadow-xl">
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <span class="text-[10px] bg-ps-blue/30 border border-ps-blue text-blue-300 font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">PS5 Console</span>
+                        <h2 class="text-lg font-bold text-slate-100 mt-1">Gaming Station</h2>
+                    </div>
+                    <span class="bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[10px] font-black uppercase px-2 py-0.5 rounded">PS-Plus Active</span>
+                </div>
+
+                <p class="text-xs text-slate-400 mb-4 leading-relaxed">Select your prioritized game for today to view helpful tips, game-breaks, and match structures:</p>
+
+                <!-- Custom Select Element for Games -->
+                <div class="space-y-3">
+                    <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider">Select Main Game</label>
+                    <select id="game-selector" onchange="updateSelectedGameInfo()" class="w-full bg-slate-950 text-slate-100 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm font-semibold focus:outline-none focus:border-ps-lightBlue focus:ring-1 focus:ring-ps-lightBlue transition">
+                        <option value="fc26" selected>⚽ EA SPORTS FC 26</option>
+                        <option value="r6">🎯 Rainbow Six Siege (R6)</option>
+                        <option value="reforger">🪖 Arma Reforger</option>
+                        <option value="spiderman">🕷️ Spider-Man 2</option>
+                        <option value="sniper5">🔭 Sniper Elite 5</option>
+                    </select>
+                </div>
+
+                <!-- Game Specific Metadata Block -->
+                <div id="game-info-block" class="mt-4 bg-slate-950 border border-slate-800 rounded-xl p-4">
+                    <!-- Dynamic details will be loaded here -->
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="w-10 h-10 rounded-lg bg-emerald-950/50 flex items-center justify-center text-xl" id="game-emoji">⚽</div>
+                        <div>
+                            <h3 id="game-title" class="text-sm font-extrabold text-slate-200">EA SPORTS FC 26</h3>
+                            <span id="game-tag" class="text-[10px] text-slate-400 font-bold tracking-wide uppercase">Sports Simulation</span>
+                        </div>
+                    </div>
+                    <p id="game-desc" class="text-xs text-slate-400 leading-relaxed">Fast-paced, great for quick 15-minute intervals. Easy to pause between games when Salat approaches!</p>
+                    <div class="mt-3 pt-3 border-t border-slate-900 flex justify-between text-[11px] text-slate-400">
+                        <span>Target Session: <strong id="game-session-time" class="text-slate-200">60 mins</strong></span>
+                        <span>Break interval: <strong id="game-break-interval" class="text-slate-200">After 2 matches</strong></span>
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+
+        <!-- RIGHT COLUMN: Interactive Summer Routine Calendar / Timeline (8 Cols) -->
+        <section class="lg:col-span-8 flex flex-col gap-6">
+
+            <!-- Summer Quests Tracker (Gamification) -->
+            <div class="bg-gradient-to-r from-emerald-950/60 to-slate-900 border border-emerald-900/40 rounded-2xl p-5 shadow-xl">
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
+                    <div>
+                        <h2 class="text-base font-bold text-emerald-400 flex items-center gap-2">
+                            <span>🎮 Daily Gamer-Salat Quests</span>
+                        </h2>
+                        <p class="text-xs text-slate-300">Complete quests today to unlock gaming time and level up!</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="resetQuests()" class="text-xs bg-slate-800/80 hover:bg-slate-800 border border-slate-700 hover:border-slate-600 px-3 py-1.5 rounded-lg font-semibold transition">Reset Quests</button>
+                    </div>
+                </div>
+
+                <!-- Quest List -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <!-- Quest 1 -->
+                    <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-3 flex items-start justify-between gap-2" id="quest-card-1">
+                        <div class="flex items-start gap-3">
+                            <input type="checkbox" id="quest-1" onchange="toggleQuest(1, 100)" class="mt-1 w-4 h-4 rounded border-slate-800 text-emerald-600 focus:ring-emerald-500 bg-slate-900">
+                            <div>
+                                <h4 class="text-xs font-bold text-slate-200">Pillar of Salat</h4>
+                                <p class="text-[11px] text-slate-400">Pray Dhuhr & Asr on time without missing</p>
+                            </div>
+                        </div>
+                        <span class="text-[10px] font-bold text-amber-400 whitespace-nowrap">+100 XP</span>
+                    </div>
+
+                    <!-- Quest 2 -->
+                    <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-3 flex items-start justify-between gap-2" id="quest-card-2">
+                        <div class="flex items-start gap-3">
+                            <input type="checkbox" id="quest-2" onchange="toggleQuest(2, 100)" class="mt-1 w-4 h-4 rounded border-slate-800 text-emerald-600 focus:ring-emerald-500 bg-slate-900">
+                            <div>
+                                <h4 class="text-xs font-bold text-slate-200">Gamer Discipline</h4>
+                                <p class="text-[11px] text-slate-400">Do room chores BEFORE starting your console</p>
+                            </div>
+                        </div>
+                        <span class="text-[10px] font-bold text-amber-400 whitespace-nowrap">+100 XP</span>
+                    </div>
+
+                    <!-- Quest 3 -->
+                    <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-3 flex items-start justify-between gap-2" id="quest-card-3">
+                        <div class="flex items-start gap-3">
+                            <input type="checkbox" id="quest-3" onchange="toggleQuest(3, 150)" class="mt-1 w-4 h-4 rounded border-slate-800 text-emerald-600 focus:ring-emerald-500 bg-slate-900">
+                            <div>
+                                <h4 class="text-xs font-bold text-slate-200">Physical Mastery</h4>
+                                <p class="text-[11px] text-slate-400">60 mins outside or doing physical sports</p>
+                            </div>
+                        </div>
+                        <span class="text-[10px] font-bold text-amber-400 whitespace-nowrap">+150 XP</span>
+                    </div>
+
+                    <!-- Quest 4 -->
+                    <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-3 flex items-start justify-between gap-2" id="quest-card-4">
+                        <div class="flex items-start gap-3">
+                            <input type="checkbox" id="quest-4" onchange="toggleQuest(4, 150)" class="mt-1 w-4 h-4 rounded border-slate-800 text-emerald-600 focus:ring-emerald-500 bg-slate-900">
+                            <div>
+                                <h4 class="text-xs font-bold text-slate-200">Brain Powerup</h4>
+                                <p class="text-[11px] text-slate-400">Read Qur'an or a book for 30 minutes</p>
+                            </div>
+                        </div>
+                        <span class="text-[10px] font-bold text-amber-400 whitespace-nowrap">+150 XP</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Schedule Routine Panel -->
+            <div class="bg-gradient-to-b from-slate-900 to-slate-950 border border-slate-800 rounded-2xl p-5 shadow-xl flex-grow flex flex-col">
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-slate-800 pb-4 mb-4">
+                    <div>
+                        <h2 class="text-lg font-bold text-slate-100 flex items-center gap-2">
+                            <span>📅 Summer Master Routine Schedule</span>
+                        </h2>
+                        <p class="text-xs text-slate-400">Tailored summer schedule balancing PS5 gaming with Salat times in Palestine.</p>
+                    </div>
+                    <!-- Mode Selector (Normal Weekday vs Friday Jummah) -->
+                    <div class="flex gap-1.5 bg-slate-950 border border-slate-800 p-1 rounded-lg">
+                        <button onclick="switchScheduleMode('weekday')" id="mode-weekday" class="text-xs font-bold px-3 py-1.5 rounded-md transition bg-ps-blue text-white">
+                            Regular Day
+                        </button>
+                        <button onclick="switchScheduleMode('friday')" id="mode-friday" class="text-xs font-bold px-3 py-1.5 rounded-md transition text-slate-400 hover:text-slate-200">
+                            Friday Jumu'ah
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Timeline / Hours container -->
+                <div class="space-y-4 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar flex-grow" id="schedule-timeline">
+                    <!-- Standard Schedule loaded via JS dynamically for both modes -->
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Detailed Gaming Match/Session Guide Modal/Info Center -->
+    <section class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pb-10">
+        <div class="bg-gradient-to-tr from-slate-900 to-slate-950 border border-slate-800 rounded-2xl p-6 shadow-xl">
+            <h3 class="text-base font-extrabold text-slate-100 mb-4 flex items-center gap-2">
+                <span class="text-ps-lightBlue">🎮</span> Tactical Gaming Guide & PS Plus Catalog Strategy
+            </h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-slate-300">
+                
+                <div class="bg-slate-950 border border-slate-900 rounded-xl p-4">
+                    <h4 class="text-sm font-bold text-amber-400 mb-2 flex items-center gap-1.5">
+                        <span>🎖️</span> Multiplayer Focus (R6 & Reforger)
+                    </h4>
+                    <p class="leading-relaxed mb-3">These are heavy communication, long-session tactical games. Play these during the long gap between <strong>Asr (4:18 PM)</strong> and <strong>Maghrib (7:42 PM)</strong>.</p>
+                    <ul class="list-disc pl-4 space-y-1 text-slate-400">
+                        <li>R6: Play 1-2 unranked matches max before taking a quick stretch.</li>
+                        <li>Arma Reforger: Play during the late-night slot; server campaigns take time.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-slate-950 border border-slate-900 rounded-xl p-4">
+                    <h4 class="text-sm font-bold text-ps-lightBlue mb-2 flex items-center gap-1.5">
+                        <span>⚽</span> Sports & Action (FC 26 & Spider-Man)
+                    </h4>
+                    <p class="leading-relaxed mb-3">Great for quick visual immersion or fast gameplay. Use these during the late-morning or early-afternoon slots.</p>
+                    <ul class="list-disc pl-4 space-y-1 text-slate-400">
+                        <li>FC 26: Play Ultimate Team or Career Mode matches; easily pausable.</li>
+                        <li>Spider-Man 2 & Sniper 5: Excellent for winding down in the evening after Maghrib/Isha.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-slate-950 border border-slate-900 rounded-xl p-4">
+                    <h4 class="text-sm font-bold text-emerald-400 mb-2 flex items-center gap-1.5">
+                        <span>🕌</span> Salat & Screen-Rest Routine
+                    </h4>
+                    <p class="leading-relaxed mb-3">Treat each Salat as your natural "Gamer Break." Stand up, wash (Wudu), walk to the Masjid, pray, and get water.</p>
+                    <ul class="list-disc pl-4 space-y-1 text-slate-400">
+                        <li>Eye Rest: Keep screen time healthy in the hot Palestinian summer.</li>
+                        <li>Mosque walk: Perfect active movement boost!</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 border-t border-slate-900 py-6 text-center text-xs text-slate-500">
+        <p>© 2026 Summer Routine Planner for Middle Schoolers in Palestine. All Rights Reserved.</p>
+        <p class="mt-1">Play responsibly, pray on time, and make it an epic summer!</p>
+    </footer>
+
+    <!-- App Logic Script -->
+    <script>
+        // Set state variables
+        let currentMode = 'weekday';
+        let currentXP = 0;
+        let selectedCity = 'ramallah';
+        let salatStatus = {
+            fajr: false,
+            dhuhr: false,
+            asr: false,
+            maghrib: false,
+            isha: false
+        };
+        let completedQuests = {
+            1: false,
+            2: false,
+            3: false,
+            4: false
+        };
+
+        // Real Base Prayer Times for June 2026 (Ramallah, Palestine)
+        const BASE_PRAYER_TIMES = {
+            fajr: { hour: 3, minute: 55 },
+            dhuhr: { hour: 12, minute: 37 },
+            asr: { hour: 16, minute: 18 },
+            maghrib: { hour: 19, minute: 42 },
+            isha: { hour: 21, minute: 16 }
+        };
+
+        // City offsets in minutes to simulate local changes dynamically
+        const CITY_OFFSETS = {
+            ramallah: { offset: 0, displayName: "Ramallah, Palestine" },
+            jerusalem: { offset: 0, displayName: "Jerusalem Al-Quds, Palestine" },
+            gaza: { offset: 3, displayName: "Gaza Strip, Palestine" },
+            hebron: { offset: 2, displayName: "Hebron (Al-Khalil), Palestine" },
+            nablus: { offset: -1, displayName: "Nablus, Palestine" }
+        };
+
+        // Helper to get active prayer times applying city offsets
+        function getActivePrayerTimes() {
+            const offset = CITY_OFFSETS[selectedCity].offset;
+            let activeTimes = {};
+            
+            for (let prayer in BASE_PRAYER_TIMES) {
+                let baseMinutes = BASE_PRAYER_TIMES[prayer].hour * 60 + BASE_PRAYER_TIMES[prayer].minute;
+                let adjustedMinutes = baseMinutes + offset;
+                
+                let hour = Math.floor(adjustedMinutes / 60);
+                let minute = adjustedMinutes % 60;
+                
+                activeTimes[prayer] = {
+                    hour: hour,
+                    minute: minute,
+                    ampm: hour >= 12 ? 'PM' : 'AM',
+                    label: prayer.charAt(0).toUpperCase() + prayer.slice(1)
+                };
+            }
+            return activeTimes;
+        }
+
+        // Helper to convert 24 hour object into highly readable 12 hour string
+        function formatTime12(hour, minute) {
+            let period = "AM";
+            let displayHour = hour;
+            if (hour >= 12) {
+                period = "PM";
+                if (hour > 12) {
+                    displayHour = hour - 12;
+                }
+            } else if (hour === 0) {
+                displayHour = 12;
+            }
+            return `${displayHour}:${String(minute).padStart(2, '0')} ${period}`;
+        }
+
+        // Update city and repaint components
+        function selectCity(cityKey) {
+            selectedCity = cityKey;
+            
+            // Highlight selected button
+            const cities = ['ramallah', 'jerusalem', 'gaza', 'hebron', 'nablus'];
+            cities.forEach(c => {
+                const btn = document.getElementById(`btn-city-${c}`);
+                const pin = document.getElementById(`pin-${c}`);
+                if (c === cityKey) {
+                    btn.className = "w-full text-left text-xs font-semibold py-1.5 px-2.5 rounded-lg border bg-emerald-950/40 border-emerald-600/80 text-emerald-300 transition flex items-center justify-between";
+                    if (pin) {
+                        pin.setAttribute('fill', '#34d399'); // emerald
+                        pin.setAttribute('r', '6');
+                        pin.classList.add('animate-bounce');
+                    }
+                } else {
+                    btn.className = "w-full text-left text-xs font-semibold py-1.5 px-2.5 rounded-lg border bg-slate-950 border-slate-800 text-slate-300 hover:border-slate-700 transition flex items-center justify-between";
+                    if (pin) {
+                        pin.setAttribute('fill', '#64748b'); // slate
+                        pin.setAttribute('r', '5');
+                        pin.classList.remove('animate-bounce');
+                    }
+                }
+            });
+
+            // Update UI elements
+            document.getElementById('selected-city-tag').innerText = cityKey.charAt(0).toUpperCase() + cityKey.slice(1);
+            document.getElementById('salat-location-header').innerHTML = `${CITY_OFFSETS[cityKey].displayName} <svg class="w-4 h-4 text-emerald-400" fill="currentColor" viewBox="0 0 20 20"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path></svg>`;
+            document.getElementById('top-banner-text').innerText = `Summer Routine 2026 • Live Salat Tracker for ${CITY_OFFSETS[cityKey].displayName}`;
+
+            // Redraw prayer times list
+            updateTimetableDisplay();
+            updatePalestineClockAndCountdown();
+            addXP(10); // Reward location change
+        }
+
+        function updateTimetableDisplay() {
+            const activeTimes = getActivePrayerTimes();
+            document.getElementById('time-fajr').innerText = formatTime12(activeTimes.fajr.hour, activeTimes.fajr.minute);
+            document.getElementById('time-dhuhr').innerText = formatTime12(activeTimes.dhuhr.hour, activeTimes.dhuhr.minute);
+            document.getElementById('time-asr').innerText = formatTime12(activeTimes.asr.hour, activeTimes.asr.minute);
+            document.getElementById('time-maghrib').innerText = formatTime12(activeTimes.maghrib.hour, activeTimes.maghrib.minute);
+            document.getElementById('time-isha').innerText = formatTime12(activeTimes.isha.hour, activeTimes.isha.minute);
+        }
+
+        // Game specific information mapping
+        const GAME_DATA = {
+            fc26: {
+                title: "EA SPORTS FC 26",
+                category: "Sports Simulation",
+                emoji: "⚽",
+                desc: "Fast-paced match cycles (12-15 mins). Great for quick sessions in the late morning. High intensity but easy to pause or stop instantly when Dhuhr approaches.",
+                session: "60 mins (approx. 4-5 matches)",
+                break: "After 2 matches"
+            },
+            r6: {
+                title: "Rainbow Six Siege (R6)",
+                category: "Tactical Shooter / Team PvP",
+                emoji: "🎯",
+                desc: "Extremely high concentration game. Use the post-Asr slot for this when you have a long gaming interval. Communication and quick reaction time are keys.",
+                session: "90 mins (approx. 3 ranked/unranked matches)",
+                break: "Every match"
+            },
+            reforger: {
+                title: "Arma Reforger",
+                category: "Military Sandbox / Milsim",
+                emoji: "🪖",
+                desc: "Immersive military simulator with complex operations. Best played during the late-night slot with friends on PS-Plus, as server campaigns require long tactical planning.",
+                session: "120 mins",
+                break: "After 1 full mission"
+            },
+            spiderman: {
+                title: "Spider-Man 2",
+                category: "Action Adventure",
+                emoji: "🕷️",
+                desc: "Incredible story sandbox. Perfect game for casual play after dinner (post-Isha). Explore New York and complete challenges at your own pace without pressure.",
+                session: "60-90 mins",
+                break: "Every 45 mins"
+            },
+            sniper5: {
+                title: "Sniper Elite 5",
+                category: "Tactical Stealth",
+                emoji: "🔭",
+                desc: "Slow-paced stealth gameplay. Spot targets, plan infiltrations, and execute precise long shots. Perfect to play when you want to relax without needing rapid button mashing.",
+                session: "60-90 mins",
+                break: "Between campaign levels"
+            }
+        };
+
+        // Complete detailed schedules list
+        const WEEKDAY_SCHEDULE = [
+            { time: "08:30 AM", title: "Wake Up & Fajr Checkup", desc: "Wake up, clean up, and start your morning with a fresh vibe. Quick light breakfast.", type: "routine", bg: "bg-slate-900 border-slate-800" },
+            { time: "09:00 AM", title: "Household Duty & Brain Powerup", desc: "Do your chores (clean room, tidy gaming desk) and spend 30 minutes reading Quran or a book.", type: "quest", bg: "bg-emerald-950/20 border-emerald-900/40" },
+            { time: "10:30 AM", title: "Console Slot 1: Play Spider-Man 2 or Sniper Elite 5", desc: "Perfect time for story-driven/single-player gameplay. Fun, high quality, easy to pause.", type: "game", bg: "bg-ps-blue/10 border-ps-blue/30" },
+            { time: "12:00 PM", title: "Wind-down & Prep for Dhuhr", desc: "Shut down the PS5. Wash up, make Wudu, and walk down to the neighborhood Masjid.", type: "salat", bg: "bg-amber-950/20 border-amber-900/40" },
+            { time: "12:37 PM", title: "🕌 DHUHR SALAT PRAYER BREAK", desc: "Dhuhr prayer at the Masjid. Perfect opportunity to walk, get sunlight, and stay active.", type: "salat-main", bg: "bg-emerald-900/30 border-emerald-700/50" },
+            { time: "01:15 PM", title: "Family Lunch & Hydration", desc: "Enjoy a tasty lunch with your family, talk about your plans, and drink plenty of water.", type: "routine", bg: "bg-slate-900 border-slate-800" },
+            { time: "02:30 PM", title: "Console Slot 2: EA SPORTS FC 26 (Quick Matches)", desc: "Hop on Ultimate Team or Career Mode for friendly matches with friends or solo challenges.", type: "game", bg: "bg-ps-blue/10 border-ps-blue/30" },
+            { time: "04:00 PM", title: "Prep for Asr Salat", desc: "Take a break, wash up, get a snack, and prepare to go pray.", type: "salat", bg: "bg-amber-950/20 border-amber-900/40" },
+            { time: "04:18 PM", title: "🕌 ASR SALAT PRAYER BREAK", desc: "Pray Asr. This prayer marks the boundary for your big afternoon block.", type: "salat-main", bg: "bg-emerald-900/30 border-emerald-700/50" },
+            { time: "04:45 PM", title: "Console Slot 3: Tactical Block (R6 or Arma Reforger)", desc: "With your PS-Plus subscription, join your buddies online for tactical matches. Longest gaming block of the day!", type: "game", bg: "bg-ps-blue/10 border-ps-blue/30" },
+            { time: "06:30 PM", title: "☀️ Active Time Outdoors (Middle Schooler Workout)", desc: "Go outside! Play real football with friends, ride a bike, or walk. Super important to stay healthy during summer.", type: "quest", bg: "bg-emerald-950/20 border-emerald-900/40" },
+            { time: "07:42 PM", title: "🕌 MAGHRIB SALAT & Family Dinner", desc: "Pray Maghrib together, then sit down for an evening snack or family meal.", type: "salat-main", bg: "bg-emerald-900/30 border-emerald-700/50" },
+            { time: "08:30 PM", title: "Free Time / PS-Plus Store Browsing", desc: "Check out what's new in the PlayStation Plus catalogs, download monthly games, or customize your setup.", type: "game", bg: "bg-ps-blue/10 border-ps-blue/30" },
+            { time: "09:16 PM", title: "🕌 ISHA SALAT & Late Night Chill", desc: "Pray Isha. Final prayer of the day. Rest of the evening is yours to wind down.", type: "salat-main", bg: "bg-emerald-900/30 border-emerald-700/50" },
+            { time: "11:00 PM", title: "Screen Shutdown & Sleek Sleep Routine", desc: "Charge your controller. Shut down screen. Head to bed to maintain a healthy sleep schedule.", type: "routine", bg: "bg-slate-900 border-slate-800" }
+        ];
+
+        const FRIDAY_SCHEDULE = [
+            { time: "09:00 AM", title: "Wake Up & Jummah Readiness", desc: "Clean up, wear nice clean clothes, put on Bukhoor/fragrance.", type: "routine", bg: "bg-slate-900 border-slate-800" },
+            { time: "10:00 AM", title: "Surah Al-Kahf & Study Block", desc: "Fulfill the Sunnah of Friday by reading Surah Al-Kahf before Jumu'ah prayer.", type: "quest", bg: "bg-emerald-950/20 border-emerald-900/40" },
+            { time: "11:30 AM", title: "Early Departure for Masjid", desc: "Walk slowly to the neighborhood Mosque to catch Jumu'ah khutbah on time.", type: "salat-main", bg: "bg-emerald-900/30 border-emerald-700/50" },
+            { time: "12:37 PM", title: "🕌 JUMU'AH CONGREGATIONAL PRAYER", desc: "Attend the Friday Congregational Prayer and Khutbah.", type: "salat-main", bg: "bg-emerald-950 border-emerald-800/80" },
+            { time: "01:30 PM", title: "Grand Friday Family Meal", desc: "A great traditional Palestinian lunch with your entire family (Maqluba day!).", type: "routine", bg: "bg-slate-900 border-slate-800" },
+            { time: "03:00 PM", title: "Console Slot 1: Friday Gaming Kickoff (EA SPORTS FC 26)", desc: "Start your weekend gaming with quick, exciting FIFA matches.", type: "game", bg: "bg-ps-blue/10 border-ps-blue/30" },
+            { time: "04:18 PM", title: "🕌 ASR SALAT PRAYER BREAK", desc: "Time for Asr. Step away from the screen, pray, and wash up.", type: "salat-main", bg: "bg-emerald-900/30 border-emerald-700/50" },
+            { time: "04:45 PM", title: "Console Slot 2: Squad up for R6 / Arma Reforger", desc: "Perfect Friday evening gaming with the boys using PS-Plus online play.", type: "game", bg: "bg-ps-blue/10 border-ps-blue/30" },
+            { time: "07:00 PM", title: "Social/Family Visit", desc: "Visit relatives or grandparents. Connect with family.", type: "quest", bg: "bg-emerald-950/20 border-emerald-900/40" },
+            { time: "07:42 PM", title: "🕌 MAGHRIB PRAYER", desc: "Pray Maghrib on time during your visit or back home.", type: "salat-main", bg: "bg-emerald-900/30 border-emerald-700/50" },
+            { time: "09:16 PM", title: "🕌 ISHA PRAYER & Late Night Gaming Room", desc: "Pray Isha, then head back to the game room for some weekend-only night gaming (Arma Reforger / Spider-Man 2).", type: "game", bg: "bg-ps-blue/10 border-ps-blue/30" },
+            { time: "11:30 PM", title: "Screen Shutdown", desc: "Sleep early to recharge for another sunny summer day tomorrow.", type: "routine", bg: "bg-slate-900 border-slate-800" }
+        ];
+
+        // Init App On Load
+        window.onload = function() {
+            // Render timetable on screen
+            renderSchedule();
+            updateSelectedGameInfo();
+            updateTimetableDisplay();
+            
+            // Set up an active countdown interval
+            setInterval(updatePalestineClockAndCountdown, 1000);
+            updatePalestineClockAndCountdown();
+        };
+
+        // Render schedule based on mode selection
+        function renderSchedule() {
+            const list = currentMode === 'weekday' ? WEEKDAY_SCHEDULE : FRIDAY_SCHEDULE;
+            const container = document.getElementById('schedule-timeline');
+            container.innerHTML = '';
+
+            list.forEach((item, index) => {
+                // Determine icon and theme style
+                let iconMarkup = '';
+                if (item.type === 'salat-main' || item.type === 'salat') {
+                    iconMarkup = `<span class="text-xl">🕌</span>`;
+                } else if (item.type === 'game') {
+                    iconMarkup = `<span class="text-xl">🎮</span>`;
+                } else if (item.type === 'quest') {
+                    iconMarkup = `<span class="text-xl">⭐</span>`;
+                } else {
+                    iconMarkup = `<span class="text-xl">🕒</span>`;
+                }
+
+                container.innerHTML += `
+                    <div class="border rounded-xl p-4 transition duration-200 hover:scale-[1.01] ${item.bg} flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-10 h-10 rounded-lg bg-slate-950 flex items-center justify-center border border-slate-800 flex-shrink-0">
+                                ${iconMarkup}
+                            </div>
+                            <div>
+                                <div class="flex items-center gap-2 flex-wrap">
+                                    <span class="text-xs font-mono font-bold text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">${item.time}</span>
+                                    <h3 class="text-sm font-extrabold text-slate-200">${item.title}</h3>
+                                </div>
+                                <p class="text-xs text-slate-400 mt-1 leading-relaxed">${item.desc}</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Checkoff / completion interactives for gamer timeline -->
+                        <div class="flex items-center gap-3 justify-end md:justify-start">
+                            <button onclick="toggleTimelineCheck(${index}, this)" class="text-[11px] font-bold px-3 py-1.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition flex items-center gap-1.5">
+                                <span>Complete</span>
+                                <svg class="w-3.5 h-3.5 text-emerald-400 hidden check-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // Toggle task checks on timeline
+        function toggleTimelineCheck(index, btnEl) {
+            const checkIcon = btnEl.querySelector('.check-icon');
+            if (checkIcon.classList.contains('hidden')) {
+                checkIcon.classList.remove('hidden');
+                btnEl.classList.add('bg-emerald-950', 'text-emerald-400', 'border-emerald-700');
+                btnEl.classList.remove('bg-slate-800', 'text-slate-300', 'border-slate-700');
+                btnEl.querySelector('span').innerText = 'Done!';
+                addXP(25);
+            } else {
+                checkIcon.classList.add('hidden');
+                btnEl.classList.remove('bg-emerald-950', 'text-emerald-400', 'border-emerald-700');
+                btnEl.classList.add('bg-slate-800', 'text-slate-300', 'border-slate-700');
+                btnEl.querySelector('span').innerText = 'Complete';
+                addXP(-25);
+            }
+        }
+
+        // Switch Regular Schedule vs Friday Schedule
+        function switchScheduleMode(mode) {
+            currentMode = mode;
+            const btnWeekday = document.getElementById('mode-weekday');
+            const btnFriday = document.getElementById('mode-friday');
+
+            if (mode === 'weekday') {
+                btnWeekday.className = "text-xs font-bold px-3 py-1.5 rounded-md transition bg-ps-blue text-white";
+                btnFriday.className = "text-xs font-bold px-3 py-1.5 rounded-md transition text-slate-400 hover:text-slate-200";
+            } else {
+                btnFriday.className = "text-xs font-bold px-3 py-1.5 rounded-md transition bg-emerald-600 text-white";
+                btnWeekday.className = "text-xs font-bold px-3 py-1.5 rounded-md transition text-slate-400 hover:text-slate-200";
+            }
+            renderSchedule();
+        }
+
+        // Selected Game Display Updates
+        function updateSelectedGameInfo() {
+            const selector = document.getElementById('game-selector');
+            const selectedVal = selector.value;
+            const data = GAME_DATA[selectedVal];
+
+            document.getElementById('game-emoji').innerText = data.emoji;
+            document.getElementById('game-title').innerText = data.title;
+            document.getElementById('game-tag').innerText = data.category;
+            document.getElementById('game-desc').innerText = data.desc;
+            document.getElementById('game-session-time').innerText = data.session;
+            document.getElementById('game-break-interval').innerText = data.break;
+        }
+
+        // Toggle Salat Checklist Status
+        function toggleSalatCheck(salatKey) {
+            salatStatus[salatKey] = !salatStatus[salatKey];
+            const checkEl = document.getElementById(`chk-${salatKey}`);
+            const btnEl = document.getElementById(`btn-${salatKey}`);
+            const rowEl = document.getElementById(`salat-${salatKey}`);
+
+            if (salatStatus[salatKey]) {
+                checkEl.classList.remove('hidden');
+                btnEl.classList.add('bg-emerald-950', 'border-emerald-600');
+                rowEl.classList.add('bg-emerald-950/10', 'border-emerald-900/50');
+                addXP(50);
+            } else {
+                checkEl.classList.add('hidden');
+                btnEl.classList.remove('bg-emerald-950', 'border-emerald-600');
+                rowEl.classList.remove('bg-emerald-950/10', 'border-emerald-900/50');
+                addXP(-50);
+            }
+        }
+
+        // Daily Quest State Checks
+        function toggleQuest(id, xpVal) {
+            completedQuests[id] = !completedQuests[id];
+            const card = document.getElementById(`quest-card-${id}`);
+            if (completedQuests[id]) {
+                card.classList.add('bg-emerald-950/30', 'border-emerald-900');
+                addXP(xpVal);
+            } else {
+                card.classList.remove('bg-emerald-950/30', 'border-emerald-900');
+                addXP(-xpVal);
+            }
+        }
+
+        function resetQuests() {
+            for (let i = 1; i <= 4; i++) {
+                const cb = document.getElementById(`quest-${i}`);
+                if (cb.checked) {
+                    cb.checked = false;
+                    toggleQuest(i, i <= 2 ? 100 : 150);
+                }
+            }
+        }
+
+        // Reward / XP Points Handling
+        function addXP(val) {
+            currentXP += val;
+            if (currentXP < 0) currentXP = 0;
+            document.getElementById('xp-counter').innerText = currentXP;
+        }
+
+        // Countdown Timer & Live Digital Clock (EEST Palestine)
+        function updatePalestineClockAndCountdown() {
+            const now = new Date();
+            
+            // Format Palestinian Time display
+            const options = { timeZone: 'Asia/Hebron', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+            const formatter = new Intl.DateTimeFormat('en-US', options);
+            document.getElementById('current-time-display').innerText = formatter.format(now);
+
+            const currentHour = now.getHours();
+            const currentMin = now.getMinutes();
+            const currentSec = now.getSeconds();
+
+            // Fetch adjusted active times
+            const activeTimes = getActivePrayerTimes();
+
+            let targetHour = 0;
+            let targetMin = 0;
+            let prayerName = "Dhuhr";
+
+            if (currentHour < activeTimes.fajr.hour || (currentHour === activeTimes.fajr.hour && currentMin < activeTimes.fajr.minute)) {
+                targetHour = activeTimes.fajr.hour; targetMin = activeTimes.fajr.minute; prayerName = "Fajr";
+            } else if (currentHour < activeTimes.dhuhr.hour || (currentHour === activeTimes.dhuhr.hour && currentMin < activeTimes.dhuhr.minute)) {
+                targetHour = activeTimes.dhuhr.hour; targetMin = activeTimes.dhuhr.minute; prayerName = "Dhuhr";
+            } else if (currentHour < activeTimes.asr.hour || (currentHour === activeTimes.asr.hour && currentMin < activeTimes.asr.minute)) {
+                targetHour = activeTimes.asr.hour; targetMin = activeTimes.asr.minute; prayerName = "Asr";
+            } else if (currentHour < activeTimes.maghrib.hour || (currentHour === activeTimes.maghrib.hour && currentMin < activeTimes.maghrib.minute)) {
+                targetHour = activeTimes.maghrib.hour; targetMin = activeTimes.maghrib.minute; prayerName = "Maghrib";
+            } else if (currentHour < activeTimes.isha.hour || (currentHour === activeTimes.isha.hour && currentMin < activeTimes.isha.minute)) {
+                targetHour = activeTimes.isha.hour; targetMin = activeTimes.isha.minute; prayerName = "Isha";
+            } else {
+                targetHour = activeTimes.fajr.hour + 24; targetMin = activeTimes.fajr.minute; prayerName = "Fajr";
+            }
+
+            let diffSec = ((targetHour * 3600) + (targetMin * 60)) - ((currentHour * 3600) + (currentMin * 60) + currentSec);
+            if (diffSec < 0) diffSec = 0;
+
+            const h = Math.floor(diffSec / 3600);
+            const m = Math.floor((diffSec % 3600) / 60);
+            const s = diffSec % 60;
+
+            const countdownStr = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+            
+            document.getElementById('next-prayer-name').innerText = prayerName;
+            document.getElementById('next-prayer-timer').innerText = countdownStr;
+        }
+    </script>
+</body>
+</html>
